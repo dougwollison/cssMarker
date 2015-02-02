@@ -14,7 +14,7 @@ cssMarker.prototype.onAdd = function(){
 
 	div.className = 'cssmarker';
 	div.style.position = 'absolute';
-	div.innerHTML = options.contents ?: '';
+	div.innerHTML = this.options_.contents ? this.options_.contents : '';
 
 	this.div_ = div;
 

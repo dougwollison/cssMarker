@@ -1,16 +1,16 @@
-function cssMarker(options){
+function cssMarker( options ) {
 	this.options_ = options;
 	this.map_ = options.map;
 	this.position_ = options.position;
 	this.div_ = null;
 
-	this.setMap(options.map);
+	this.setMap( options.map );
 }
 
 cssMarker.prototype = new google.maps.OverlayView();
 
-cssMarker.prototype.onAdd = function(){
-	var div = document.createElement('div');
+cssMarker.prototype.onAdd = function() {
+	var div = document.createElement( 'div' );
 
 	div.className = 'cssmarker';
 	div.style.position = 'absolute';
@@ -19,68 +19,68 @@ cssMarker.prototype.onAdd = function(){
 	this.div_ = div;
 
 	var panes = this.getPanes();
-	panes.overlayMouseTarget.appendChild(div);
+	panes.overlayMouseTarget.appendChild( div );
 }
 
-cssMarker.prototype.draw = function(){
+cssMarker.prototype.draw = function() {
 	var projection = this.getProjection();
 
-	var position = projection.fromLatLngToDivPixel(this.position_);
+	var position = projection.fromLatLngToDivPixel( this.position_ );
 
 	var div = this.div_;
 	div.style.top = position.y + 'px';
 	div.style.left = position.x + 'px';
 
-	this.addClass(this.options_.classes);
+	this.addClass( this.options_.classes );
 }
 
-cssMarker.prototype.onRemove = function(){
-	this.div_.parentNode.removeChild(this.div_);
+cssMarker.prototype.onRemove = function() {
+	this.div_.parentNode.removeChild( this.div_ );
 	this.div_ = null;
 };
 
-cssMarker.prototype.hide = function(){
-	if(this.div_){
+cssMarker.prototype.hide = function() {
+	if ( this.div_ ) {
 		this.div_.style.visibility = 'hidden';
 	}
 };
 
-cssMarker.prototype.show = function(){
-	if(this.div_){
+cssMarker.prototype.show = function() {
+	if ( this.div_ ) {
 		this.div_.style.visibility = 'visible';
 	}
 };
 
-cssMarker.prototype.toggle = function(){
-	if(this.div_){
-		if(this.div_.style.visibility == 'hidden'){
+cssMarker.prototype.toggle = function() {
+	if ( this.div_) {
+		if ( this.div_.style.visibility == 'hidden' ) {
 			this.show();
-		}else{
+		} else {
 			this.hide();
 		}
 	}
 };
 
-cssMarker.prototype.getPosition = function(){
+cssMarker.prototype.getPosition = function() {
 	return this.position_;
 };
 
-cssMarker.prototype.hasClass = function(name){
+cssMarker.prototype.hasClass = function( name ) {
 	var div = this.div_;
-	return (' '+div.className+' ').indexOf(' '+name+' ') >= 0;
+	return ( ' ' + div.className + ' ') .indexOf( ' ' + name + ' ' ) >= 0;
 };
 
-cssMarker.prototype.addClass = function(name){
+cssMarker.prototype.addClass = function( name ) {
 	var div = this.div_;
 
-	if(!this.hasClass(name)){
-		div.className += (div.className ? ' ' : '') + name;
+	if ( ! this.hasClass( name ) ) {
+		div.className += ( div.className ? ' ' : '' ) + name;
 	}
 
 	return this;
 };
 
-cssMarker.prototype.removeClass = function(classes){
+cssMarker.prototype.removeClass = function( classes ) {
 	var div = this.div_;
 
 	var set = ' '+div.className+' ';
@@ -90,16 +90,16 @@ cssMarker.prototype.removeClass = function(classes){
 		set = set.replace(' '+name+' ', ' ');
 	}
 
-	div.className = typeof set.trim === 'function' ? set.trim() : set.replace(/^\s+|\s+$/g, '');
+	div.className = typeof set.trim === 'function' ? set.trim() : set.replace( /^\s+|\s+$/g, '' );
 
 	return this;
 };
 
-cssMarker.prototype.toggleClass = function(classes, toggle){
-	if(this.hasClass(name) || toggle === false){
-		this.removeClass(name);
-	}else if(!this.hasClass(name) || toggle === true){
-		this.addClass(name);
+cssMarker.prototype.toggleClass = function( classes, toggle ) {
+	if ( this.hasClass( name ) || toggle === false ) {
+		this.removeClass( name );
+	} else if ( ! this.hasClass( name ) || toggle === true ) {
+		this.addClass( name );
 	}
 
 	return this;

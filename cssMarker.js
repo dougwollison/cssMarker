@@ -1,3 +1,5 @@
+/* globals google */
+
 function cssMarker( options ) {
 	this.options_ = options;
 	this.map_ = options.map;
@@ -20,7 +22,7 @@ cssMarker.prototype.onAdd = function() {
 
 	var panes = this.getPanes();
 	panes.overlayMouseTarget.appendChild( div );
-}
+};
 
 cssMarker.prototype.draw = function() {
 	var projection = this.getProjection();
@@ -32,7 +34,7 @@ cssMarker.prototype.draw = function() {
 	div.style.left = position.x + 'px';
 
 	this.addClass( this.options_.classes );
-}
+};
 
 cssMarker.prototype.onRemove = function() {
 	this.div_.parentNode.removeChild( this.div_ );
@@ -53,7 +55,7 @@ cssMarker.prototype.show = function() {
 
 cssMarker.prototype.toggle = function() {
 	if ( this.div_) {
-		if ( this.div_.style.visibility == 'hidden' ) {
+		if ( this.div_.style.visibility === 'hidden' ) {
 			this.show();
 		} else {
 			this.hide();
@@ -80,14 +82,14 @@ cssMarker.prototype.addClass = function( name ) {
 	return this;
 };
 
-cssMarker.prototype.removeClass = function( classes ) {
+cssMarker.prototype.removeClass = function( name ) {
 	var div = this.div_;
 
-	var set = ' '+div.className+' ';
+	var set = ' ' + div.className + ' ';
 
 	// Class name may appear multiple times
-	while(set.indexOf(' '+name+' ') >= 0){
-		set = set.replace(' '+name+' ', ' ');
+	while ( set.indexOf( ' ' + name + ' ' ) >= 0 ) {
+		set = set.replace( ' ' + name + ' ', ' ' );
 	}
 
 	div.className = typeof set.trim === 'function' ? set.trim() : set.replace( /^\s+|\s+$/g, '' );

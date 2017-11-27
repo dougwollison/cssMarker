@@ -97,7 +97,7 @@ cssMarker.prototype.removeClass = function( name ) {
 	return this;
 };
 
-cssMarker.prototype.toggleClass = function( classes, toggle ) {
+cssMarker.prototype.toggleClass = function( name, toggle ) {
 	if ( this.hasClass( name ) || toggle === false ) {
 		this.removeClass( name );
 	} else if ( ! this.hasClass( name ) || toggle === true ) {
